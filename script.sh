@@ -1,27 +1,5 @@
 #!/bin/sh
 
-# Firewall Setup
-cat > /etc/rc.local <<XOK
-#!/bin/bash
-
-ufw --force enable
-ufw default deny incoming
-ufw default deny outgoing
-ufw allow ssh
-ufw allow 514/tcp
-ufw allow 514/udp
-
-ufw allow out 4041/tcp
-ufw allow out 443/tcp
-ufw allow out 123/tcp
-ufw allow out 22/tcp
-ufw allow out 80/tcp
-ufw allow out 53/tcp
-ufw allow out 53/udp
-ufw allow out 123/udp
-
-XOK
-chmod a+x /etc/rc.local
 
 # Add Sudoer user
 
@@ -53,4 +31,21 @@ echo "tmpfs   /tmp    tmpfs       nosuid,noexec   0 0" >> /etc/fstab
 
 apt install -y --no-install-recommends checksecurity debsecan tiger
 
+sleep 2
+# Firewall Setup
 
+ufw --force enable
+ufw default deny incoming
+ufw default deny outgoing
+ufw allow ssh
+ufw allow 514/tcp
+ufw allow 514/udp
+
+ufw allow out 4041/tcp
+ufw allow out 443/tcp
+ufw allow out 123/tcp
+ufw allow out 22/tcp
+ufw allow out 80/tcp
+ufw allow out 53/tcp
+ufw allow out 53/udp
+ufw allow out 123/udp
